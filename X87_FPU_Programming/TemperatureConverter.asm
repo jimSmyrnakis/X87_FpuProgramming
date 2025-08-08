@@ -31,7 +31,7 @@ CelsiusToFahrenheit proc
 	pop ebp
 	ret
 CelsiusToFahrenheit endp
-
+;st0 , st1 , st2 , st3 , st4 , st5 , st6 , st7
 ; c = (f - 32) * 5/9(or FToC) 
 FahrenheitToCelsius proc
 	push ebp
@@ -40,7 +40,7 @@ FahrenheitToCelsius proc
 	fld real8 ptr [FToC] ;
 	fld real8 ptr [ebp + 8]
 	fild real8 ptr [i4_32] ; load 32 integer into FPU stack but first converts it to double
-
+	
 	fsubp
 	fmulp
 	

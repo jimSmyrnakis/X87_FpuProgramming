@@ -132,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="cacMeanStdev_ASM.asm" />
+    <MASM Include="MinMaxF32Asm.asm" />
     <MASM Include="SphereComputation.asm" />
     <MASM Include="TemperatureConverter.asm">
       <FileType>Document</FileType>

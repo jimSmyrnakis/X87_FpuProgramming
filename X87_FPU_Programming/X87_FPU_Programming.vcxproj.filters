@@ -29,6 +29,9 @@
     <MASM Include="cacMeanStdev_ASM.asm">
       <Filter>Source Files</Filter>
     </MASM>
+    <MASM Include="MinMaxF32Asm.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="X87_FPU_Programming.hpp">

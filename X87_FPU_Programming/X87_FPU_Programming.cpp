@@ -4,7 +4,6 @@
 #include <iostream>
 #include "X87_FPU_Programming.hpp"
 double vol = 0.0;
-bool cacMeanStdev_C(const double* arr, uint32_t n, double* mean, double* stdev);
 
 void TestMeanStdev(void) {
     uint32_t n;
@@ -17,7 +16,7 @@ void TestMeanStdev(void) {
         std::cerr << "STDEV can not have zero elements " << std::endl;
         exit(1);
     }
-
+    arr = (double*)malloc(n * sizeof(double));
     for (int i = 0; i < n; i++) {
         std::cout << "a[" << i << "] : ";
         std::cin >> arr[i];
@@ -25,11 +24,17 @@ void TestMeanStdev(void) {
 
     }
     cacMeanStdev_C(arr, n, &mean, &stdev);
-    std::cout << "mean : " << mean << " stdev : " << stdev;
+    std::cout << "mean : " << mean << " stdev : " << stdev <<std::endl;
     double mean2 = 0.0, stdev2 = 0.0;
     cacMeanStdev_ASM(arr, n, &mean2, &stdev2);
-    std::cout << "mean2 : " <<  mean2 << " stdev2 : " << stdev2;
+    std::cout << "mean2 : " <<  mean2 << " stdev2 : " << stdev2 << std::endl;
 
+    float arr2[10] = {
+        1,2,3,4,5,6,7,8,9,10
+    };
+    float minArr2, maxArr2;
+    MinMaxF32Asm(arr2, 10, &minArr2, &maxArr2);
+    std::cout << "Min : " << minArr2 << " Max : " << maxArr2 << std::endl;
 
 }
 int main()
@@ -49,6 +54,10 @@ int main()
         std::cout << "Surf : " << surf << " Volume : " << vol << std::endl;
     else
         std::cerr << "r makes result as Nan or i less equal to zero !!!";
+
+    TestMeanStdev();
+
+
 
 }
 bool cacMeanStdev_C(const double* arr, uint32_t n, double* mean, double* stdev) {
