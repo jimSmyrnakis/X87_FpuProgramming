@@ -57,8 +57,13 @@ int main()
 
     TestMeanStdev();
 
-
-
+    double cartX = 5, cartY = 10 , polR , polA;
+    CartesianToPolarCoords(cartX, cartY, &polR, &polA);
+    std::cout << "Cart( x : " << cartX << " y : " << cartY << 
+        ") ==> Polar( R : " << polR << " Ang = " << polA << "degrees ) " << std::endl;
+    PolarToCartesianCoords(polR, polA, &cartX, &cartY);
+    std::cout << "Cart( x : " << cartX << " y : " << cartY <<
+        ") ==> Polar( R : " << polR << " Ang = " << polA << "degrees ) " << std::endl;
 }
 bool cacMeanStdev_C(const double* arr, uint32_t n, double* mean, double* stdev) {
     if (n <= 1)
