@@ -37,6 +37,16 @@ void TestMeanStdev(void) {
     std::cout << "Min : " << minArr2 << " Max : " << maxArr2 << std::endl;
 
 }
+
+void LeastSquares(void) {
+    double x[] = { 1,2,3,4,5,6,7 };
+    double y[] = { 1*2 + 1,2 * 2 + 1,3 * 2 + 1,4 * 2 + 1,5 * 2 + 1,6 * 2 + 1,7 * 2 + 1 };
+    double m, b; 
+    calcLeastSquaresCpp(x,y, 7, &m, &b);
+    std::cout << "m : " << m << " b : " << b << std::endl;
+    calcLeastSquares(x, y, 7, &m, &b);
+    std::cout << "m : " << m << " b : " << b << std::endl;
+}
 int main()
 {
     double f = 25.0;
@@ -64,6 +74,8 @@ int main()
     PolarToCartesianCoords(polR, polA, &cartX, &cartY);
     std::cout << "Cart( x : " << cartX << " y : " << cartY <<
         ") ==> Polar( R : " << polR << " Ang = " << polA << "degrees ) " << std::endl;
+
+    LeastSquares();
 }
 bool cacMeanStdev_C(const double* arr, uint32_t n, double* mean, double* stdev) {
     if (n <= 1)
@@ -85,13 +97,26 @@ bool cacMeanStdev_C(const double* arr, uint32_t n, double* mean, double* stdev) 
     return true;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+bool calcLeastSquaresCpp(double* x , double* y, int32_t n, double* m, double* b) {
+    if (n <= 0)
+        return false;
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+    double sum_x = 0, sum_y = 0, sum_xy = 0, sum_xx = 0;
+
+    for (int i = 0; i < n; i++) {
+        sum_x += x[i];
+        sum_y += y[i];
+        sum_xy += (x[i] * y[i]);
+        sum_xx += (x[i] * x[i]);
+    }
+    double denom = (n * sum_xx - (sum_x * sum_x));
+    if (LsEpsilon >= fabs(denom))
+        return false;
+
+    (*m) = (n * sum_xy - sum_x * sum_y) / denom;
+    (*b) = (sum_xx * sum_y - sum_x * sum_xy) / denom;
+
+    return true;
+}
+
+//le > Open > Project and select the .sln file

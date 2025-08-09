@@ -35,6 +35,9 @@
     <MASM Include="Coverter.asm">
       <Filter>Source Files</Filter>
     </MASM>
+    <MASM Include="calcLeastSquares.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="X87_FPU_Programming.hpp">
